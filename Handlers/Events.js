@@ -10,12 +10,12 @@ module.exports = async (client) => {
         (await PG(`${process.cwd()}/Events/*/*.js`)).map(async (file) => {
             const event = require(file);
 
+            // line 19로 대체됨
             // if (!Events.includes(event.name) || !event.name) {
             //     const L = file.split("/");
             //     await Table.addRow(`${event.name || "MISSING"}`, `⛔ Event name is either invalid or missing : ${L[6] + '/' + L[7]}`);
             //     return;
             // }
-
             if (event.name) {
                 if (!Events.includes(event.name))
                     return Table.addRow(file.split("/")[7], "🔸 FAILED", "Event name is missing.");
