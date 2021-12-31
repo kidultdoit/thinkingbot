@@ -2,7 +2,7 @@ const client = require("../../index");
 const { MessageEmbed } = require("discord.js");
 
 const status = queue => `볼륨 크기: \`${queue.volume}%\` | 반복 모드 : \`${queue.repeatMode ? (queue.repeatMode === 2 ? "플레이 리스트" : "현재 곡") : "Off"
-    }\` | 자동 재생: \`${queue.autoplay ? "켜짐" : "꺼짐"}\``
+    }\` | 자동 재생: \`${queue.autoplay ? "On" : "Off"}\``
     
 client.distube
     .on("playSong", (queue, song) => queue.textChannel.send({
