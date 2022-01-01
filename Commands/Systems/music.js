@@ -57,8 +57,8 @@ module.exports = {
             switch (options.getSubcommand()) {
                 case "play": {
                     client.distube.playVoiceChannel(VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
-                    return interaction.reply({ content: "" }); 
-                    //return interaction.reply({ content: "성공적으로 입력했어요" });
+                    // return interaction.reply({ content: "" }); 
+                    return interaction.reply({ content: "성공적으로 입력했어요" });
                 }
                 case "volume": {
                     const Volume = options.getNumber("percent");
