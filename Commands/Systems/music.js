@@ -17,7 +17,12 @@ module.exports = {
             type: "SUB_COMMAND",
             options: [{ name: "percent", description: "1 ~ 100의 숫자로 볼륨을 조절해요", type: "NUMBER", required: true }]
         },
-
+        // {
+        //     name: "jump",
+        //     description: "원하는 곡 스킵하기",
+        //     type: "SUB_COMMAND",
+        //     options: [{ name: "jump", description: "원하는 곡을 스킵해요", type: "NUMBER", required: true }]
+        // },
         {
             name: "settings",
             description: "다양한 옵션이 있어요",
@@ -55,6 +60,11 @@ module.exports = {
         
         try {
             switch (options.getSubcommand()) {
+                // case "jump": {
+                //     const jump = options.getNumber("jump");
+                //     client.distube.jump(VoiceChannel, jump);
+                //     return interaction.reply({ content: `${jump}번째 노래를 삭제했어요` });
+                // }
                 case "play": {
                     client.distube.playVoiceChannel(VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
                     // return interaction.reply({ content: "" }); 
