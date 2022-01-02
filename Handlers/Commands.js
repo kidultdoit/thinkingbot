@@ -41,10 +41,7 @@ module.exports = async (client) => {
     // PERMISSIONS CHECK //
 
     client.on("ready", async () => {
-        const MainGuild = await client.guilds.cache.get("367656645947293696");
-        const SubGuild1 = await client.guilds.cache.get("745671352207540234");
-        const SubGuild2 = await client.guilds.cache.get("431545257176334356");
-        const SubGuild3 = await client.guilds.cache.get("337223129783074816");
+        const MainGuild = await client.guilds.cache.get("745671352207540234"); 
 
         MainGuild.commands.set(CommandsArray).then(async (command) => {
             const Roles = (commandName) => {
@@ -58,17 +55,22 @@ module.exports = async (client) => {
                 const roles = Roles(r.name);
                 if (!roles) return accumulator;
 
-                const permission = roles.reduce((a, r) => {
+                const permissions = roles.reduce((a, r) => {
                     return [...a, { id: r.id, type: "ROLE", permission: true }]
                 }, []);
 
-                return [...accumulator, { id: r.id, remove: true }]
+                return [...accumulator, { id: r.id, permissions }]
             }, []);
 
             await MainGuild.commands.permissions.set({ fullPermissions });
 
 
         });
+
+
+        const SubGuild1 = await client.guilds.cache.get("367656645947293696");
+        const SubGuild2 = await client.guilds.cache.get("431545257176334356");
+        const SubGuild3 = await client.guilds.cache.get("337223129783074816");
 
         SubGuild1.commands.set(CommandsArray).then(async (command) => {
             const Roles = (commandName) => {
