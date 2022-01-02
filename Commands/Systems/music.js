@@ -17,6 +17,7 @@ module.exports = {
             type: "SUB_COMMAND",
             options: [{ name: "percent", description: "1 ~ 100의 숫자로 볼륨을 조절해요", type: "NUMBER", required: true }]
         },
+        // n번째 노래로 이동. n-1번째 노래는 스킵
         // {
         //     name: "jump",
         //     description: "원하는 곡 스킵하기",
