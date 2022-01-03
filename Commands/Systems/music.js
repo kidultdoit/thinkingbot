@@ -13,7 +13,7 @@ module.exports = {
         },
         {
             name: "volume",
-            description: "볼륨을 조절해요",
+            description: "📶 볼륨을 조절해요",
             type: "SUB_COMMAND",
             options: [{ name: "percent", description: "1 ~ 100의 숫자로 볼륨을 조절해요", type: "NUMBER", required: true }]
         },
@@ -34,11 +34,11 @@ module.exports = {
                     { name: "🔢 대기열을 보고싶어요", value: "queue" },
                     { name: "⏭ 건너뛰고 싶어요", value: "skip" },
                     { name: "⏸ 일시정지 하고 싶어요", value: "pause" },
-                    { name: "▶ 다시 들을래요", value: "resume" },
+                    { name: "⏯ 다시 들을래요", value: "resume" },
                     { name: "⏹ 그만 들을래요", value: "stop" },
                     { name: "🔀 순서를 섞고싶어요", value: "shuffle" },
-                    { name: "🔄 자동 재생 모드를 바꾸고 싶어요", value: "AutoPlay" },
                     { name: "🈁 연관 노래를 추가하고 싶어요", value: "RelatedSong" },
+                    { name: "🔄 자동 재생 모드를 바꾸고 싶어요(자동 재생 ON/OFF)", value: "AutoPlay" },
                     { name: "🔁 반복 모드를 바꾸고 싶어요(플레이리스트 or 노래 반복)", value: "RepeatMode" },
                 ]
             }]
