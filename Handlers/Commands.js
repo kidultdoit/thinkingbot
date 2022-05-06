@@ -19,17 +19,17 @@ module.exports = async (client) => {
 
         if (!command.name)
             return Table.addRow(file.split("/")[7], "🔶 FAILED", "Missing a name.")
-        
+
         if (!command.description)
             return Table.addRow(command.name, "🔶 FAILED", "Missing a description.")
-        
+
         if (command.permission) {
             if (Perms.includes(command.permission))
                 command.defaultPermission = false;
             else
                 return Table.addRow(command.name, "🔶 FAILED", "Permission is invalid.")
         }
-        
+
         client.commands.set(command.name, command);
         CommandsArray.push(command);
 
@@ -40,108 +40,120 @@ module.exports = async (client) => {
 
     // PERMISSIONS CHECK //
 
-    client.on("ready", async () => {
-        const MainGuild = await client.guilds.cache.get("745671352207540234"); 
-
-        MainGuild.commands.set(CommandsArray).then(async (command) => {
-            const Roles = (commandName) => {
-                const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
-                if (!cmdPerms) return null;
-
-                return MainGuild.roles.cache.filter((r) => r.permissions.has(cmdPerms));
-            }
-
-            const fullPermissions = command.reduce((accumulator, r) => {
-                const roles = Roles(r.name);
-                if (!roles) return accumulator;
-
-                const permissions = roles.reduce((a, r) => {
-                    return [...a, { id: r.id, type: "ROLE", permission: true }]
-                }, []);
-
-                return [...accumulator, { id: r.id, permissions }]
-            }, []);
-
-            await MainGuild.commands.permissions.set({ fullPermissions });
-
-
-        });
-
-
+    client.on('ready', async () => {
+        const mainGuild = await client.guilds.cache.get("745671352207540234");
         const SubGuild1 = await client.guilds.cache.get("367656645947293696");
         const SubGuild2 = await client.guilds.cache.get("431545257176334356");
         const SubGuild3 = await client.guilds.cache.get("337223129783074816");
+        mainGuild.commands.set(CommandsArray);
+        SubGuild1.commands.set(CommandsArray);
+        SubGuild2.commands.set(CommandsArray);
+        SubGuild3.commands.set(CommandsArray);
 
-        SubGuild1.commands.set(CommandsArray).then(async (command) => {
-            const Roles = (commandName) => {
-                const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
-                if (!cmdPerms) return null;
-
-                return SubGuild1.roles.cache.filter((r) => r.permissions.has(cmdPerms));
-            }
-
-            const fullPermissions = command.reduce((accumulator, r) => {
-                const roles = Roles(r.name);
-                if (!roles) return accumulator;
-
-                const permission = roles.reduce((a, r) => {
-                    return [...a, { id: r.id, type: "ROLE", permission: true }]
-                }, []);
-
-                return [...accumulator, { id: r.id, remove: true }]
-            }, []);
-
-            await SubGuild1.commands.permissions.set({ fullPermissions });
-
-
-        });
-
-        SubGuild2.commands.set(CommandsArray).then(async (command) => {
-            const Roles = (commandName) => {
-                const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
-                if (!cmdPerms) return null;
-
-                return SubGuild2.roles.cache.filter((r) => r.permissions.has(cmdPerms));
-            }
-
-            const fullPermissions = command.reduce((accumulator, r) => {
-                const roles = Roles(r.name);
-                if (!roles) return accumulator;
-
-                const permission = roles.reduce((a, r) => {
-                    return [...a, { id: r.id, type: "ROLE", permission: true }]
-                }, []);
-
-                return [...accumulator, { id: r.id, remove: true }]
-            }, []);
-
-            await SubGuild2.commands.permissions.set({ fullPermissions });
-
-
-        });
-
-        SubGuild3.commands.set(CommandsArray).then(async (command) => {
-            const Roles = (commandName) => {
-                const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
-                if (!cmdPerms) return null;
-
-                return SubGuild3.roles.cache.filter((r) => r.permissions.has(cmdPerms));
-            }
-
-            const fullPermissions = command.reduce((accumulator, r) => {
-                const roles = Roles(r.name);
-                if (!roles) return accumulator;
-
-                const permission = roles.reduce((a, r) => {
-                    return [...a, { id: r.id, type: "ROLE", permission: true }]
-                }, []);
-
-                return [...accumulator, { id: r.id, remove: true }]
-            }, []);
-
-            await SubGuild3.commands.permissions.set({ fullPermissions });
-
-
-        });
     });
+
+    // client.on("ready", async () => {
+    //     const MainGuild = await client.guilds.cache.get("745671352207540234"); 
+
+    //     MainGuild.commands.set(CommandsArray).then(async (command) => {
+    //         const Roles = (commandName) => {
+    //             const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
+    //             if (!cmdPerms) return null;
+
+    //             return MainGuild.roles.cache.filter((r) => r.permissions.has(cmdPerms));
+    //         }
+
+    //         const fullPermissions = command.reduce((accumulator, r) => {
+    //             const roles = Roles(r.name);
+    //             if (!roles) return accumulator;
+
+    //             const permissions = roles.reduce((a, r) => {
+    //                 return [...a, { id: r.id, type: "ROLE", permission: true }]
+    //             }, []);
+
+    //             return [...accumulator, { id: r.id, permissions }]
+    //         }, []);
+
+    //         await MainGuild.commands.permissions.set({ fullPermissions });
+
+
+    //     });
+
+
+    //     const SubGuild1 = await client.guilds.cache.get("367656645947293696");
+    //     const SubGuild2 = await client.guilds.cache.get("431545257176334356");
+    //     const SubGuild3 = await client.guilds.cache.get("337223129783074816");
+
+    //     SubGuild1.commands.set(CommandsArray).then(async (command) => {
+    //         const Roles = (commandName) => {
+    //             const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
+    //             if (!cmdPerms) return null;
+
+    //             return SubGuild1.roles.cache.filter((r) => r.permissions.has(cmdPerms));
+    //         }
+
+    //         const fullPermissions = command.reduce((accumulator, r) => {
+    //             const roles = Roles(r.name);
+    //             if (!roles) return accumulator;
+
+    //             const permission = roles.reduce((a, r) => {
+    //                 return [...a, { id: r.id, type: "ROLE", permission: true }]
+    //             }, []);
+
+    //             return [...accumulator, { id: r.id, remove: true }]
+    //         }, []);
+
+    //         await SubGuild1.commands.permissions.set({ fullPermissions });
+
+
+    //     });
+
+    //     SubGuild2.commands.set(CommandsArray).then(async (command) => {
+    //         const Roles = (commandName) => {
+    //             const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
+    //             if (!cmdPerms) return null;
+
+    //             return SubGuild2.roles.cache.filter((r) => r.permissions.has(cmdPerms));
+    //         }
+
+    //         const fullPermissions = command.reduce((accumulator, r) => {
+    //             const roles = Roles(r.name);
+    //             if (!roles) return accumulator;
+
+    //             const permission = roles.reduce((a, r) => {
+    //                 return [...a, { id: r.id, type: "ROLE", permission: true }]
+    //             }, []);
+
+    //             return [...accumulator, { id: r.id, remove: true }]
+    //         }, []);
+
+    //         await SubGuild2.commands.permissions.set({ fullPermissions });
+
+
+    //     });
+
+    //     SubGuild3.commands.set(CommandsArray).then(async (command) => {
+    //         const Roles = (commandName) => {
+    //             const cmdPerms = CommandsArray.find((c) => c.name === commandName).permission;
+    //             if (!cmdPerms) return null;
+
+    //             return SubGuild3.roles.cache.filter((r) => r.permissions.has(cmdPerms));
+    //         }
+
+    //         const fullPermissions = command.reduce((accumulator, r) => {
+    //             const roles = Roles(r.name);
+    //             if (!roles) return accumulator;
+
+    //             const permission = roles.reduce((a, r) => {
+    //                 return [...a, { id: r.id, type: "ROLE", permission: true }]
+    //             }, []);
+
+    //             return [...accumulator, { id: r.id, remove: true }]
+    //         }, []);
+
+    //         await SubGuild3.commands.permissions.set({ fullPermissions });
+
+
+    //     });
+    // });
 }

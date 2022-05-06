@@ -1,4 +1,4 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, Intents } = require("discord.js");
 const client = new Client({ intents: 32767 });
 
 client.commands = new Collection()
@@ -17,4 +17,4 @@ module.exports = client;
 require("./Handlers/Events")(client);
 require("./Handlers/Commands")(client);
 
-client.login(process.env.TOKEN);
+client.login("OTI2MjI3NTE1MjEzNzQyMTUy.Yc4mmA.UkTGtvjQ_A5NwxewDSCVypNyKN0");
