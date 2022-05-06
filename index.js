@@ -17,4 +17,4 @@ module.exports = client;
 require("./Handlers/Events")(client);
 require("./Handlers/Commands")(client);
 
-client.login("OTI2MjI3NTE1MjEzNzQyMTUy.Yc4mmA.UkTGtvjQ_A5NwxewDSCVypNyKN0");
+client.login(process.env.TOKEN);
