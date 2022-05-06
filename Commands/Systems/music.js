@@ -55,10 +55,10 @@ module.exports = {
 
         if (!VoiceChannel)
             return interaction.reply({ content: "음성 채널에 먼저 접속해야해요", ephemeral: true });
-        
+
         if (guild.me.voice.channelId && VoiceChannel.id !== guild.me.voice.channelId)
             return interaction.reply({ content: `이미 음성 채널에 접속해있어요 <#${guild.me.voice.channelId}>`, ephemeral: true });
-        
+
         try {
             switch (options.getSubcommand()) {
                 // case "jump": {
@@ -67,7 +67,7 @@ module.exports = {
                 //     return interaction.reply({ content: `${jump}번째 노래를 삭제했어요` });
                 // }
                 case "play": {
-                    client.distube.playVoiceChannel(VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
+                    client.distube.play(VoiceChannel, options.getString("query"), { textChannel: channel, member: member });
                     // return interaction.reply({ content: "" }); 
                     return interaction.reply({ content: "성공적으로 입력했어요" });
                 }
@@ -75,16 +75,16 @@ module.exports = {
                     const Volume = options.getNumber("percent");
                     if (Volume > 100 || Volume < 1)
                         return interaction.reply({ content: "볼륨 조절 값은 1 ~ 100 사이여야 해요" })
-                    
+
                     client.distube.setVolume(VoiceChannel, Volume);
-                    return interaction.reply({content: `🔊 볼륨 \`${Volume}%\`로 바꿨어요`})
+                    return interaction.reply({ content: `🔊 볼륨 \`${Volume}%\`로 바꿨어요` })
                 }
                 case "settings": {
                     const queue = await client.distube.getQueue(VoiceChannel);
 
                     if (!queue)
                         return interaction.reply({ content: "⛔ 노래가 텅텅 비었어요" });
-                    
+
                     switch (options.getString("options")) {
                         case "skip": {
                             await queue.skip(VoiceChannel);
@@ -117,7 +117,7 @@ module.exports = {
                         case "RepeatMode": {
                             let Mode2 = await client.distube.setRepeatMode(queue);
                             return interaction.reply({ content: `🔁 ${Mode2 = Mode2 ? Mode2 == 2 ? "현재 플레이 리스트를 반복해요" : "현재 노래를 반복해요" : "반복 모드가 꺼졌어요"}` })
-                        };    
+                        };
                         case "queue": {
                             return interaction.reply({
                                 embeds: [new MessageEmbed()

@@ -9,7 +9,7 @@ client.distube
         embeds: [new MessageEmbed()
             .setColor("GREEN")
             .setDescription(
-                `🎶 재생 중 🎶\n\n\`${song.name}\` - \`${song.formattedDuration}\`\n\n신청자 : ${song.user}\n${status(queue)}`)]
+                `🎶 재생 중 🎶\n\n\`${song.name}\` - \`${song.formattedDuration}\`\n\n 곡 정보 : ${song.url}\n\n신청자 : ${song.user}\n${status(queue)}`)]
     }))
 
     .on("addSong", (queue, song) =>
